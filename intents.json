@@ -7,7 +7,7 @@
     },
     {
       "tag": "products",
-      "patterns": ["laptop", "phone", "products"],
+      "patterns": ["products", "items", "what do you sell"],
       "responses": ["We have laptops, phones, and accessories."]
     },
     {
