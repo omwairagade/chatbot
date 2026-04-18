@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Chatbot</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 350px;
+      height: 500px;
+      background: #1e293b;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .chat-header {
+      background: #38bdf8;
+      padding: 15px;
+      text-align: center;
+      color: black;
+      font-weight: bold;
+    }
+
+    /* Messages */
+    .chat-box {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 70%;
+    }
+
+    .user {
+      background: #38bdf8;
+      color: black;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .bot {
+      background: #22c55e;
+      color: black;
+      margin-right: auto;
+      text-align: left;
+    }
+
+    /* Input area */
+    .chat-input {
+      display: flex;
+      padding: 10px;
+      background: #0f172a;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .chat-input button {
+      margin-left: 10px;
+      padding: 10px;
+      border: none;
+      background: #38bdf8;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="chat-container">
+
+  <div class="chat-header">
+    🤖 AI Chatbot
+  </div>
+
+  <div class="chat-box" id="messages"></div>
+
+  <div class="chat-input">
+    <input id="input" placeholder="Type a message...">
+    <button onclick="send()">Send</button>
+  </div>
+
+</div>
+
+<script>
+function send() {
+  let input = document.getElementById("input");
+  let msg = input.value;
+
+  if(msg.trim() === "") return;
+
+  let messages = document.getElementById("messages");
+
+  // User message
+  messages.innerHTML += `<div class="message user">${msg}</div>`;
+
+  fetch("/chat", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({message: msg})
+  })
+  .then(res => res.json())
+  .then(data => {
+    messages.innerHTML += `<div class="message bot">${data.response}</div>`;
+    messages.scrollTop = messages.scrollHeight;
+  });
+
+  input.value = "";
+}
+</script>
+
+</body>
+</html>

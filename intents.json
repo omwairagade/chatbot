@@ -1,0 +1,24 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["hi", "hello", "hey"],
+      "responses": ["Hello! How can I help you?", "Hi there!"]
+    },
+    {
+      "tag": "products",
+      "patterns": ["laptop", "phone", "products"],
+      "responses": ["We have laptops, phones, and accessories."]
+    },
+    {
+      "tag": "order",
+      "patterns": ["order", "buy", "purchase"],
+      "responses": ["You can order directly from our website."]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["bye", "see you"],
+      "responses": ["Goodbye!", "Take care!"]
+    }
+  ]
+}
